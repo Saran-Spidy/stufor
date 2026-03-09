@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Gig Platform</title>
+</head>
+<body>
+    <h1>Student Gig Platform</h1>
+    <a href="/register_student">Register Student</a><br>
+    <a href="/register_manager">Register Manager</a><br>
+    <a href="/post_job">Post Job (Manager)</a><br><br>
+    <a href="/dashboard">View Dashboard</a><br><br>
+    <a href="/applications">Applications</a><br>
+    <a href="/selected">Selected</a><br>
+    <a href="/completed">Completed</a><br>
+    <a href="/ranking">Ranking</a><br>
+
+    <h2>Active Jobs</h2>
+
+    {% for job in jobs %}
+    <div style="border:1px solid black; padding:10px; margin:10px;">
+        <h3>{{ job[1] }}</h3>
+        <p>Description: {{ job[2] }}</p>
+        <p>Pay: ₹{{ job[3] }}</p>
+        <p>Required Count: {{ job[4] }}</p>
+        <p>Expiry: {{ job[5] }}</p>
+
+        <form action="/apply/{{ job[0] }}" method="POST">
+            <input type="text" name="student_name" placeholder="Enter your name" required>
+            <button type="submit">Apply</button>
+        </form>
+    </div>
+    {% endfor %}
+
+<h2>Applications (Ranked)</h2>
+
+{% for app in applications %}
+<div style="border:2px solid {% if loop.index == 1 %}green{% else %}blue{% endif %}; padding:10px; margin:10px;">
+    <p><strong>Rank: {{ loop.index }}</strong></p>
+    <p>Student: {{ app[1] }}</p>
+    <p>Status: {{ app[3] }}</p>
+    <p>Rating: {{ app[4] }}</p>
+{% if app[3] == 'Completed' %}
+    <p>Reliability Score: {{ app[5] }}</p>
+{% else %}
+    <p><i>Reliability will be calculated after completion</i></p>
+{% endif %}
+
+{% if app[3] == 'Applied' %}
+    <form action="/select/{{ app[0] }}" method="POST">
+        <button type="submit">Select Candidate</button>
+    </form>
+{% endif %}
+
+{% if app[3] == 'Selected' %}
+    <form action="/complete/{{ app[0] }}" method="POST">
+        <input type="number" name="rating" min="1" max="5" required>
+        <button type="submit">Mark Completed</button>
+    </form>
+{% endif %}
+
+    {% if loop.index == 1 %}
+    <p style="color:green;"><strong>⭐ Recommended Candidate</strong></p>
+    {% endif %}
+ 
+</div>
+{% endfor %}
+
+</body>
+</html>

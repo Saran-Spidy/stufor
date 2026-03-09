@@ -1,0 +1,33 @@
+<h1>Student Registration</h1>
+
+<form method="POST">
+
+    <input type="text" name="name" placeholder="Full Name" required><br><br>
+
+    <input type="number" name="age" placeholder="Age" required><br><br>
+
+    <input type="text" name="location" placeholder="Location" required><br><br>
+
+    <input type="text" name="college" placeholder="College Name" required><br><br>
+
+    <input type="text" name="department" placeholder="Department" required><br><br>
+
+    <input type="text" name="year" placeholder="Year (1st/2nd/3rd/Final)" required><br><br>
+
+    <select name="experience_level" required>
+        <option value="">Select Experience Level</option>
+        <option value="Beginner">Beginner</option>
+        <option value="Intermediate">Intermediate</option>
+        <option value="Expert">Expert</option>
+    </select><br><br>
+
+    <label>Select Interested Roles:</label><br>
+    <select name="roles" multiple size="6" required>
+        {% for role in roles %}
+            <option value="{{ role[0] }}">{{ role[1] }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <button type="submit">Register Student</button>
+
+</form>

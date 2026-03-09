@@ -1,0 +1,9 @@
+<h1>Student Ranking</h1>
+
+{% for student in ranking %}
+<div style="border:1px solid purple; padding:10px; margin:10px;">
+    <p>Rank: {{ loop.index }}</p>
+    <p>Name: {{ student[0] }}</p>
+    <p>Score: {{ student[1] }}</p>
+</div>
+{% endfor %}

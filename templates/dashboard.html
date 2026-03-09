@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+
+<h1>Manager Dashboard</h1>
+
+<h3>Total Jobs Posted: {{ total_jobs }}</h3>
+<h3>Total Applications: {{ total_applications }}</h3>
+<h3>Total Completed Jobs: {{ completed_jobs }}</h3>
+
+<h2>Top 3 Students</h2>
+
+{% for student in student_scores %}
+    <div style="border:1px solid black; padding:10px; margin:10px;">
+        <p>Name: {{ student[0] }}</p>
+        <p>Reliability Score: {{ student[1] }}</p>
+    </div>
+{% endfor %}
+
+<a href="/">Back to Home</a>
+
+</body>
+</html>

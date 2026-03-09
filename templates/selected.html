@@ -1,0 +1,12 @@
+<h1>Selected Candidates</h1>
+
+{% for app in selected %}
+<div style="border:1px solid blue; padding:10px; margin:10px;">
+    <p>Student: {{ app[1] }}</p>
+
+    <form action="/complete/{{ app[0] }}" method="POST">
+        <input type="number" name="rating" min="1" max="5" required>
+        <button type="submit">Mark Completed</button>
+    </form>
+</div>
+{% endfor %}
